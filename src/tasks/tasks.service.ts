@@ -28,4 +28,16 @@ export class TasksService {
     task['status'] = status
     return task
   }
+
+  deleteTaskById(id: string): Task {
+    let task: Task
+    for (let i = 0; i < this.tasks.length; i++) {
+      if (id === this.tasks[i].id) {
+        task = this.tasks[i]
+        this.tasks.splice(i, 1)
+        break
+      }
+    }
+    return task
+  }
 }
