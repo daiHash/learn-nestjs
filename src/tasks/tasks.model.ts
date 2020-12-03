@@ -5,4 +5,6 @@ export interface Task {
   status: TaskStatus
 }
 
-export type TaskStatus = 'OPEN' | 'IN_PROGRESS' | 'DONE'
+
+export const taskStatuses = ['OPEN' ,'IN_PROGRESS' ,'DONE'] as const
+export type TaskStatus = typeof taskStatuses[number]
