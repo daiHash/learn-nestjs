@@ -50,14 +50,14 @@ export class TasksService {
     return this.taskRepository.createTask(createTaskDto)
   }
 
-  // updateTaskStatus(id: string, status: Task['status']): Task {
-  //   const task = this.getTaskById(id)
-  //   task['status'] = status
-  //   return task
-  // }
+  async updateTaskStatus(id: number, status: Task['status']): Promise<Task> {
+    const task = await this.getTaskById(id)
+    task['status'] = status
+    await task.save()
+    return task
+  }
 
   async deleteTaskById(id: number): Promise<string> {
-    // const task  = await this.getTaskById(id)
     const result = await this.taskRepository.delete(id)
     if (result.affected === 0) {
       throw new NotFoundException(`Task with id: ${id} does not exist`)
