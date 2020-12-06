@@ -20,31 +20,11 @@ export class TasksService {
     }
     return task
   }
-  // getAllTasks(): Task[] {
-  //   return this.tasks
-  // }
 
-  // getTasksWithFilters(filterDto: GetTasksFiltereDto): Task[] {
-  //   const {status, search} = filterDto
-  //   let tasks =this.getAllTasks()
+  async getAllTasks(filterDto: GetTasksFiltereDto):Promise<Task[]> {
+    return this.taskRepository.getAllTasks(filterDto)
+  }
 
-  //   if (status) {
-  //     tasks = tasks.filter(task => task.status ===status)
-  //   }
-  //   if (search) {
-  //     tasks = tasks.filter(task => task.title.includes(search) || task.description.includes(search))
-  //   }
-
-  //   return tasks
-  // }
-
-  // getTaskById(id: string): Task {
-  //   const task =  this.tasks.find((task) => task.id === id)
-  //   if (!task) {
-  //     throw new NotFoundException(`Task with id: ${id} does not exist`)
-  //   }
-  //   return task
-  // }
 
   async createTask(createTaskDto: CreateTaskDto): Promise<Task> {
     return this.taskRepository.createTask(createTaskDto)
