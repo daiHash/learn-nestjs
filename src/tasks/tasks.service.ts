@@ -1,10 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { CreateTaskDto } from './dto/create-task.dto';
-import { GetTasksFiltereDto } from './dto/getTasksfiltered.dto';
-import { Task } from './task.entity';
-import { TaskRepository } from './task.repository';
-import { taskStatuses } from './taskStatus.types';
+import { Injectable, NotFoundException } from '@nestjs/common'
+import { InjectRepository } from '@nestjs/typeorm'
+import { CreateTaskDto } from './dto/create-task.dto'
+import { GetTasksFiltereDto } from './dto/getTasksfiltered.dto'
+import { Task } from './task.entity'
+import { TaskRepository } from './task.repository'
 
 @Injectable()
 export class TasksService {
@@ -13,7 +12,7 @@ export class TasksService {
     private taskRepository: TaskRepository
   ) {}
 
-  async getTaskById(id: number):Promise<Task> {
+  async getTaskById(id: number): Promise<Task> {
     const task = await this.taskRepository.findOne(id)
     if (!task) {
       throw new NotFoundException(`Task with id: ${id} does not exist`)
@@ -21,10 +20,9 @@ export class TasksService {
     return task
   }
 
-  async getAllTasks(filterDto: GetTasksFiltereDto):Promise<Task[]> {
+  async getAllTasks(filterDto: GetTasksFiltereDto): Promise<Task[]> {
     return this.taskRepository.getAllTasks(filterDto)
   }
-
 
   async createTask(createTaskDto: CreateTaskDto): Promise<Task> {
     return this.taskRepository.createTask(createTaskDto)
