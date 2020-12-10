@@ -9,9 +9,10 @@ export class UserRepository extends Repository<User> {
     const { username, password } = authCredentialsDto
 
     const user = new User()
+    const salt = await bcrypt.genSalt()
 
     user.username = username
-    user.salt = await bcrypt.genSalt()
+    user.salt = salt
     user.password = await this.hashPassword(password, salt)
 
     try {
